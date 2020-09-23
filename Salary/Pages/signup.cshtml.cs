@@ -13,9 +13,26 @@ namespace Salary.Pages
 
         [BindProperty]
         public Account account { get; set; }
+
+        private DatabaseContext db;
+
+        public signupModel(DatabaseContext _db)
+        {
+            db = _db;
+
+        }
+
         public void OnGet()
         {
             account = new Account();
+        }
+        public IActionResult OnPost()
+        {
+            account.Password = BCrypt.Net.BCrypt.HashPassword(account.Password);
+            db.Accounts.Add(account);
+            db.SaveChanges();
+            return RedirectToPage("SignIn");
+
         }
     }
 }
