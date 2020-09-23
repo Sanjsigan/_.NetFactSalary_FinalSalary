@@ -1,0 +1,42 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<h1 class="display-3">Fact Amount To Final Amount</h1>
+<form class="form-group" method="post">
+
+    <input type="hidden" name="mode" value="PinRequest" />
+
+    <div class="form-group">
+        <label for="exampleInputPassword1">Type Your Fact Salary</label>
+        <input class="form-control" value="" name="tot_pin_requested" onchange="calculateAmount(this.value)" placeholder="Your Price">
+    </div>
+    <div class="form-group">
+        <label for="exampleInputPassword1">Your Salary After Some Taxes</label>
+        <input class="form-control" name="tot_amount" id="tot_amount" type="text" readonly />
+    </div>
+    <div class="form-group">
+        <label for="exampleInputPassword1">Total Tax</label>
+        <input class="form-control" name="tot_minus" id="tot_minus" type="text" readonly />
+    </div>
+    <a class="btn btn-success" asp-page="FinalToFact">Final Amount to Fact Amount</a>
+</form>
+<script>
+    function calculateAmount(val) {
+        var price = val * 1;
+
+        var tax = val * 5 / 100;
+        var medical = val * 5 / 100;
+        var travel = val * 5 / 100;
+        var minus = (tax + medical + travel)
+
+        var tot_price = price - minus;
+        var divobj = document.getElementById('tot_amount');
+        var divmin = document.getElementById('tot_minus');
+        divobj.value = tot_price;
+        divmin.value = minus;
+    }
+
+</script>

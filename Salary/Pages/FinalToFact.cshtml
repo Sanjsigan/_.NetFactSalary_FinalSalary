@@ -1,0 +1,39 @@
+﻿@page
+@model Salary.Pages.FinalToFactModel
+@{
+}
+<h1 class="display-3">Final Amount to Fact Amount</h1>
+<form class="form-group" method="post">
+
+    <input type="hidden" name="mode" value="PinRequest" />
+    <div class="form-group">
+        <label for="exampleInputPassword1">Type Your Final Salary</label>
+        <input class="form-control" value="" name="tot_pin_requested" onchange="TaxToTotal(this.value)" placeholder="Your Final Salary">
+    </div>
+    <div class="form-group">
+        <label for="exampleInputPassword1">Your Fact Amount</label>
+        <input class="form-control" name="fact_amount" id="fact_amount" type="text" readonly />
+    </div>
+    <div class="form-group">
+        <label for="exampleInputPassword1">Total Tax</label>
+        <input class="form-control" name="tot_minus" id="tot_minus" type="text" readonly />
+    </div>
+    <a class="btn btn-success" asp-page="Index">Fact Amount To Final Amount</a>
+</form>
+
+<script>
+        function TaxToTotal(val)
+        {
+            var price =val*1;
+            var tax=price*5/100;
+            var medical=price*5/100;
+            var travel=price*5/100;
+
+            var taxMinus=tax+medical+travel;
+            var factAmount=taxMinus+price;
+            var divfact = document.getElementById('fact_amount');
+            var divmin = document.getElementById('tot_minus');
+            divfact.value = factAmount;
+            divmin.value = taxMinus;
+        }
+</script>
