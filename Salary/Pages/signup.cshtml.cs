@@ -28,7 +28,7 @@ namespace Salary.Pages
         }
         public IActionResult OnPost()
         {
-            account.Password = BCrypt.Net.BCrypt.HashPassword(account.Password);
+            account.Password =(account.Password);
             db.Accounts.Add(account);
             db.SaveChanges();
             return RedirectToPage("SignIn");

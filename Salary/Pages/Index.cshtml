@@ -4,39 +4,112 @@
     ViewData["Title"] = "Home page";
 }
 
-<h1 class="display-3">Fact Amount To Final Amount</h1>
-<form class="form-group" method="post">
 
-    <input type="hidden" name="mode" value="PinRequest" />
 
-    <div class="form-group">
-        <label for="exampleInputPassword1">Type Your Fact Salary</label>
-        <input class="form-control" value="" name="tot_pin_requested" onchange="calculateAmount(this.value)" placeholder="Your Price">
-    </div>
-    <div class="form-group">
-        <label for="exampleInputPassword1">Your Salary After Some Taxes</label>
-        <input class="form-control" name="tot_amount" id="tot_amount" type="text" readonly />
-    </div>
-    <div class="form-group">
-        <label for="exampleInputPassword1">Total Tax</label>
-        <input class="form-control" name="tot_minus" id="tot_minus" type="text" readonly />
-    </div>
-    <a class="btn btn-success" asp-page="FinalToFact">Final Amount to Fact Amount</a>
-</form>
-<script>
-    function calculateAmount(val) {
-        var price = val * 1;
+   
+    <br />
+ 
+    <form class="form-group" method="post">
 
-        var tax = val * 5 / 100;
-        var medical = val * 5 / 100;
-        var travel = val * 5 / 100;
-        var minus = (tax + medical + travel)
+        <h1 class="display-3">Fact Amount To Final Amount</h1>
+        <input type="hidden" name="mode" value="PinRequest" />
 
-        var tot_price = price - minus;
-        var divobj = document.getElementById('tot_amount');
-        var divmin = document.getElementById('tot_minus');
-        divobj.value = tot_price;
-        divmin.value = minus;
-    }
+        <div class="form-group">
+            <label for="exampleInputPassword1">Type Your Fact Salary</label>
+            <input class="form-control" value="" name="tot_pin_requested" onchange="calculateAmount(this.value)" placeholder="Your Price">
+        </div>
+        <div class="form-group">
+            <label for="exampleInputPassword1">Your Salary After Some Taxes</label>
+            <input class="form-control" name="tot_amount" id="tot_amount" type="text" readonly />
+        </div>
+        <div class="form-group">
+            <label for="exampleInputPassword1">Total Tax</label>
+            <input class="form-control" name="tot_minus" id="tot_minus" type="text" readonly />
+        </div>
 
-</script>
+
+        <br />
+        <h4 class="display-5">Description of Persantage</h4>
+        <h4 class="display-7">Tax1</h4>
+        <div class="form-group">
+            <table class="table">
+
+                <tr>
+                    <td>Description</td>
+                    <td>Food</td>
+                </tr>
+                <tr>
+                    <td>Persantage</td>
+                    <td>5%</td>
+                </tr>
+                <tr>
+                    <td>Amount of This Tax</td>
+                    <td><input name="food_tax" id="food_tax" readonly /></td>
+                </tr>
+            </table>
+        </div>
+        <h4 class="display-7">Tax2</h4>
+        <div class="form-group">
+            <table class="table">
+
+                <tr>
+                    <td>Description</td>
+                    <td>Travel</td>
+                </tr>
+                <tr>
+                    <td>Persantage</td>
+                    <td>5%</td>
+                </tr>
+                <tr>
+                    <td>Amount of This Tax</td>
+                    <td><input name="medical_tax" id="medical_tax" readonly /></td>
+                </tr>
+            </table>
+        </div>
+        <br />
+        <h4 class="display-7">Tax2</h4>
+        <div class="form-group">
+            <table class="table">
+
+                <tr>
+                    <td>Description</td>
+                    <td>Travel</td>
+                </tr>
+                <tr>
+                    <td>Persantage</td>
+                    <td>5%</td>
+                </tr>
+                <tr>
+                    <td>Amount of This Tax</td>
+                    <td><input name="travel_tax" id="travel_tax" readonly /></td>
+                </tr>
+            </table>
+        </div>
+    </form>
+    <script>
+        function calculateAmount(val) {
+            var price = val * 1;
+            var tax = val * 5 / 100;
+            var medical = val * 5 / 100;
+            var travel = val * 5 / 100;
+
+
+
+            var minus = (tax + medical + travel)
+            var tot_price = price - minus;
+            var divobj = document.getElementById('tot_amount');
+            var divmin = document.getElementById('tot_minus');
+            var divfood = document.getElementById('food_tax');
+            var divmedical = document.getElementById('medical_tax');
+            var divtravel = document.getElementById('travel_tax');
+
+            divobj.value = tot_price;
+            divmin.value = minus;
+
+            divmedical.value = medical;
+            divfood.value = tax;
+            divtravel.value = travel;
+
+
+        }
+    </script>

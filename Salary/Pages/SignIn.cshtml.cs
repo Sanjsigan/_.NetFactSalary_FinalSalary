@@ -1,9 +1,9 @@
-using System;
-using System.Collections.Generic;
+
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.Extensions.Logging;
 using Salary.Model;
 
 namespace Salary.Pages
@@ -11,7 +11,7 @@ namespace Salary.Pages
     public class SignInModel : PageModel
     {
         [BindProperty]
-        public Account account { get; set; }
+        public Account accounts { get; set; }
 
         private DatabaseContext db;
 
@@ -24,37 +24,36 @@ namespace Salary.Pages
         }
         public void OnGet()
         {
-            account = new Account();
+            accounts = new Account();
 
         }
 
         public IActionResult OnPost()
         {
-            var acc = Login(account.Username, account.Password);
+            var acc = Login(accounts.Username, accounts.Password);
             if (acc == null)
             {
                 msg = "invalid";
+                return Page();
             }
             else
             {
-                return RedirectToPage("index");
+                return RedirectToPage("Index");
             }
-            return RedirectToPage("index");
+            
         }
-
-
         public Account Login(string username, string password)
         {
-            var account = db.Accounts.SingleOrDefault(a => a.Username.Equals(username));
-            if (account != null)
+            var accounts = db.Accounts.SingleOrDefault(a => a.Username.Equals(username));
+            if (accounts != null)
             {
-                if (BCrypt.Net.BCrypt.Verify(password, account.Password))
+                if (BCrypt.Net.BCrypt.Verify(password, accounts.Password))
                 {
-                    return account;
+                    return accounts;
                 }
-                
+
             }
-            return account;
+            return null;
 
 
         }
