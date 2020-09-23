@@ -376,3 +376,9 @@ G:\-.Net_Salary\Salary\Salary\bin\Debug\netcoreapp3.1\runtimes\win-x86\native\sn
 G:\-.Net_Salary\Salary\Salary\bin\Debug\netcoreapp3.1\runtimes\unix\lib\netcoreapp2.0\System.Runtime.Caching.dll
 G:\-.Net_Salary\Salary\Salary\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp2.0\System.Runtime.Caching.dll
 G:\-.Net_Salary\Salary\Salary\bin\Debug\netcoreapp3.1\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
+G:\-.Net_Salary\Salary\Salary\bin\Debug\netcoreapp3.1\BCrypt.Net-Core.dll
+G:\-.Net_Salary\Salary\Salary\obj\Debug\netcoreapp3.1\Salary.csproj.CoreCompileInputs.cache
+G:\-.Net_Salary\Salary\Salary\obj\Debug\netcoreapp3.1\Salary.MvcApplicationPartsAssemblyInfo.cs
+G:\-.Net_Salary\Salary\Salary\obj\Debug\netcoreapp3.1\Salary.MvcApplicationPartsAssemblyInfo.cache
+G:\-.Net_Salary\Salary\Salary\obj\Debug\netcoreapp3.1\Razor\Pages\SignIn.cshtml.g.cs
+G:\-.Net_Salary\Salary\Salary\obj\Debug\netcoreapp3.1\Razor\Pages\signup.cshtml.g.cs
