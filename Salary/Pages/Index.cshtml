@@ -5,21 +5,19 @@
 }
 
 
-
-   
     <br />
  
     <form class="form-group" method="post">
 
-        <h1 class="display-3">Fact Amount To Final Amount</h1>
+        <h1 class="display-3">Cross Salary To Net Salary</h1>
         <input type="hidden" name="mode" value="PinRequest" />
 
         <div class="form-group">
-            <label for="exampleInputPassword1">Type Your Fact Salary</label>
+            <label for="exampleInputPassword1">Type Cross Salary</label>
             <input class="form-control" value="" name="tot_pin_requested" onchange="calculateAmount(this.value)" placeholder="Your Price">
         </div>
         <div class="form-group">
-            <label for="exampleInputPassword1">Your Salary After Some Taxes</label>
+            <label for="exampleInputPassword1">Net Salary</label>
             <input class="form-control" name="tot_amount" id="tot_amount" type="text" readonly />
         </div>
         <div class="form-group">
@@ -81,11 +79,50 @@
                 </tr>
                 <tr>
                     <td>Amount of This Tax</td>
-                    <td><input name="travel_tax" id="travel_tax" readonly class=" border-0"/></td>
+                    <td><input name="travel_tax" id="travel_tax" readonly class=" border-0" /></td>
                 </tr>
             </table>
-        </div>
-    </form>
+            </div>
+            <br />
+            <h4 class="display-7">Income Tax Informtion</h4>
+            <div class="form-group">
+                <table class="table">
+
+                    <tr>
+                        <td>Description</td>
+                        <td>1000 to 2000</td>
+                    </tr>
+                    <tr>
+                        <td>Persantage</td>
+                        <td>5%</td>
+                    </tr>
+                    <tr>
+                        <td>Amount of This Tax</td>
+                        <td><input name="first_tax" id="first_tax" readonly class=" border-0" /></td>
+                    </tr>
+                </table>
+                </div>
+                <br />
+                <h4 class="display-7">Income Tax Informtion</h4>
+                <h5 class="display-8">Second Tax</h5>
+                <div class="form-group">
+                    <table class="table">
+
+                        <tr>
+                            <td>Description</td>
+                            <td>2001 to 3000</td>
+                        </tr>
+                        <tr>
+                            <td>Persantage</td>
+                            <td>5%</td>
+                        </tr>
+                        <tr>
+                            <td>Amount of This Tax</td>
+                            <td><input name="second_tax" id="second_tax" readonly class=" border-0" /></td>
+                        </tr>
+                    </table>
+                </div>
+</form>
     <script>
         function calculateAmount(val) {
             var price = val * 1;
@@ -110,8 +147,35 @@
             divfood.value = tax;
             divtravel.value = travel;
 
-            if (200000 < 400000 && 200000 > 400000) {
-               
+
+
+            if (price >= 1000 && price <= 2000) {
+                var extra = price * 5 / 100;
+                var minus = (tax + medical + travel + extra)
+                var tot_price = price - minus;
+
+                var divobj = document.getElementById('tot_amount');
+                var divmin = document.getElementById('tot_minus');
+                var divfirst = document.getElementById('first_tax');
+
+
+                divobj.value = tot_price;
+                divmin.value = minus;
+                divfirst.value = extra
+
+            }
+            else if(price >= 2001 && price <= 3000) {
+                var extra = price * 10 / 100;
+                var minus = (tax + medical + travel + extra)
+                var tot_price = price - minus;
+
+                var divobj = document.getElementById('tot_amount');
+                var divmin = document.getElementById('tot_minus');
+                var divsecond = document.getElementById('second_tax');
+
+                divobj.value = tot_price;
+                divmin.value = minus;
+                divsecond.value = extra
             }
         }
 
