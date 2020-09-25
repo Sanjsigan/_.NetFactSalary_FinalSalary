@@ -2,38 +2,109 @@
 @model Salary.Pages.FinalToFactModel
 @{
 }
-<h1 class="display-3">Final Amount to Fact Amount</h1>
+
+
+<br />
+
 <form class="form-group" method="post">
 
+    <h1 class="display-3">Net Salary To Gross Salary</h1>
     <input type="hidden" name="mode" value="PinRequest" />
+
     <div class="form-group">
-        <label for="exampleInputPassword1">Type Your Final Salary</label>
-        <input class="form-control" value="" name="tot_pin_requested" onchange="TaxToTotal(this.value)" placeholder="Your Final Salary">
+        <label for="exampleInputPassword1">Type Net Salary</label>
+        <input class="form-control" value="" name="tot_pin_requested" onchange="calculateAmount(this.value)" placeholder="Your Price">
     </div>
     <div class="form-group">
-        <label for="exampleInputPassword1">Your Fact Amount</label>
-        <input class="form-control" name="fact_amount" id="fact_amount" type="text" readonly />
+        <label for="exampleInputPassword1">Gross Salary</label>
+        <input class="form-control" name="tot_amount" id="tot_amount" type="text" readonly />
     </div>
     <div class="form-group">
         <label for="exampleInputPassword1">Total Tax</label>
         <input class="form-control" name="tot_minus" id="tot_minus" type="text" readonly />
     </div>
-    <a class="btn btn-success" asp-page="Index">Fact Amount To Final Amount</a>
+
+
+    <br />
+    <h4 class="display-5">Description of Persantage</h4>
+    <h4 class="display-7">Tax1</h4>
+    <div class="form-group">
+        <table class="table">
+
+            <tr>
+                <td>Description</td>
+                <td>Food</td>
+            </tr>
+            <tr>
+                <td>Persantage</td>
+                <td>5%</td>
+            </tr>
+            <tr>
+                <td>Amount of This Tax</td>
+                <td><input name="food_tax" id="food_tax" readonly class=" border-0" /></td>
+            </tr>
+        </table>
+    </div>
+    <h4 class="display-7">Tax2</h4>
+    <div class="form-group">
+        <table class="table">
+
+            <tr>
+                <td>Description</td>
+                <td>Travel</td>
+            </tr>
+            <tr>
+                <td>Persantage</td>
+                <td>5%</td>
+            </tr>
+            <tr>
+                <td>Amount of This Tax</td>
+                <td><input name="medical_tax" id="medical_tax" readonly class=" border-0" /></td>
+            </tr>
+        </table>
+    </div>
+    <br />
+    <h4 class="display-7">Tax3</h4>
+    <div class="form-group">
+        <table class="table">
+
+            <tr>
+                <td>Description</td>
+                <td>Medical</td>
+            </tr>
+            <tr>
+                <td>Persantage</td>
+                <td>5%</td>
+            </tr>
+            <tr>
+                <td>Amount of This Tax</td>
+                <td><input name="travel_tax" id="travel_tax" readonly class=" border-0" /></td>
+            </tr>
+        </table>
+    </div>
+    <br />
 </form>
-
 <script>
-        function TaxToTotal(val)
-        {
-            var price =val*1;
-            var tax=price*5/100;
-            var medical=price*5/100;
-            var travel=price*5/100;
+    function calculateAmount(val) {
+        var price = val * 1;
+        var tax = (price * 5 / 100.0);
+        var medical = (price * 5 / 100.0);
+        var travel = (price * 5 / 100.0);
 
-            var taxMinus=tax+medical+travel;
-            var factAmount=taxMinus+price;
-            var divfact = document.getElementById('fact_amount');
-            var divmin = document.getElementById('tot_minus');
-            divfact.value = factAmount;
-            divmin.value = taxMinus;
-        }
+        var minus = tax + medical + travel
+        var tot_price = price + minus;
+
+        var divobj = document.getElementById('tot_amount');
+        var divmin = document.getElementById('tot_minus');
+        var divfood = document.getElementById('food_tax');
+        var divmedical = document.getElementById('medical_tax');
+        var divtravel = document.getElementById('travel_tax');
+
+        divobj.value = tot_price;
+        divmin.value = minus;
+
+        divmedical.value = medical;
+        divfood.value = tax;
+        divtravel.value = travel;
+    }
 </script>
