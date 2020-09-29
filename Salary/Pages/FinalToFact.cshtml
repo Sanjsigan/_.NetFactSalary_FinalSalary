@@ -83,16 +83,89 @@
         </table>
     </div>
     <br />
+    <h4 class="display-7">Income Tax Informtion</h4>
+    <h5 class="display-8">First Tax</h5>
+    <div class="form-group">
+        <table class="table">
+
+            <tr>
+                <td>Description</td>
+                <td>200000 to 400000</td>
+            </tr>
+            <tr>
+                <td>Persantage</td>
+                <td>5%</td>
+            </tr>
+            <tr>
+                <td>Amount of This Tax</td>
+                <td><input name="first_tax" id="first_tax" readonly class=" border-0" /></td>
+            </tr>
+        </table>
+    </div>
+    <br />
+
+    <h5 class="display-8">Second Tax</h5>
+    <div class="form-group">
+        <table class="table">
+
+            <tr>
+                <td>Description</td>
+                <td>400000 to 800000</td>
+            </tr>
+            <tr>
+                <td>Persantage</td>
+                <td>10%</td>
+            </tr>
+            <tr>
+                <td>Amount of This Tax</td>
+                <td><input name="second_tax" id="second_tax" readonly class=" border-0" /></td>
+            </tr>
+        </table>
+    </div>
+    <h5 class="display-8">Third Tax</h5>
+    <div class="form-group">
+        <table class="table">
+
+            <tr>
+                <td>Description</td>
+                <td> 800000 to 1200000</td>
+            </tr>
+            <tr>
+                <td>Persantage</td>
+                <td>20%</td>
+            </tr>
+            <tr>
+                <td>Amount of This Tax</td>
+                <td><input name="third_tax" id="third_tax" readonly class=" border-0" /></td>
+            </tr>
+        </table>
+    </div>
+    <br />
+    <h5 class="display-8">Fourth Tax</h5>
+    <div class="form-group">
+        <table class="table">
+
+            <tr>
+                <td>Description</td>
+                <td>More Than  1200000 </td>
+            </tr>
+            <tr>
+                <td>Persantage</td>
+                <td>25%</td>
+            </tr>
+            <tr>
+                <td>Amount of This Tax</td>
+                <td><input name="fourth_tax" id="fourth_tax" readonly class=" border-0" /></td>
+            </tr>
+        </table>
+    </div>
 </form>
 <script>
     function calculateAmount(val) {
         var price = val * 1;
-        var tax = (price * 5 / 100.0);
-        var medical = (price * 5 / 100.0);
-        var travel = (price * 5 / 100.0);
-
-        var minus = tax + medical + travel
-        var tot_price = price + minus;
+        var tax = val * 5 / 100;
+        var medical = val * 5 / 100;
+        var travel = val * 5 / 100;
 
         var divobj = document.getElementById('tot_amount');
         var divmin = document.getElementById('tot_minus');
@@ -106,5 +179,111 @@
         divmedical.value = medical;
         divfood.value = tax;
         divtravel.value = travel;
+
+        if (price < 200000) {
+
+
+            var minus = (tax + medical + travel)
+            var tot_price = price + minus;
+
+            var divobj = document.getElementById('tot_amount');
+            var divmin = document.getElementById('tot_minus');
+            var divfood = document.getElementById('food_tax');
+            var divmedical = document.getElementById('medical_tax');
+            var divtravel = document.getElementById('travel_tax');
+
+            divobj.value = tot_price;
+            divmin.value = minus;
+
+            divmedical.value = medical;
+            divfood.value = tax;
+            divtravel.value = travel;
+        }
+
+
+        else if (price >= 200000 && price <= 400000) {
+            var extra1 = price - 200000;
+            var final_tax1 = extra1 * 5 / 100;
+            var minus = (tax + medical + travel + final_tax1)
+            var tot_price = price + minus;
+
+            var divobj = document.getElementById('tot_amount');
+            var divmin = document.getElementById('tot_minus');
+            var divfirst = document.getElementById('first_tax');
+
+            document.getElementById('second_tax').value = "";
+            document.getElementById('third_tax').value = "";
+
+            divobj.value = tot_price;
+            divmin.value = minus;
+            divfirst.value = final_tax1;
+
+        }
+        else if (price >= 400000 && price <= 800000) {
+            var extra2 = price - 400000;
+            var incomee1 = (price - 200000) * 5 / 100;
+            var final_tax2 = extra2 * 10 / 100;
+            var minus = (tax + medical + travel + final_tax2 + incomee1)
+            var tot_price = price + minus;
+
+            var divobj = document.getElementById('tot_amount');
+            var divmin = document.getElementById('tot_minus');
+            var divsecond = document.getElementById('second_tax');
+            var divfirst = document.getElementById('first_tax');
+            document.getElementById('third_tax').value = "";
+
+            divobj.value = tot_price;
+            divmin.value = minus;
+            divsecond.value = final_tax2;
+            divfirst.value = incomee1;
+
+        }
+        else if (price >= 800000 && price <= 1200000) {
+            var extra3 = price - 800000;
+            var incomee1 = (price - 200000) * 5 / 100;
+            var income2 = (price - 400000) * 10 / 100;
+            var final_tax3 = extra3 * 20 / 100;
+            var minus = (tax + medical + travel + final_tax3 + incomee1 + income2)
+            var tot_price = price + minus;
+
+            var divobj = document.getElementById('tot_amount');
+            var divmin = document.getElementById('tot_minus');
+            var divthird = document.getElementById('third_tax');
+            var divfirst = document.getElementById('first_tax');
+            var divsecond = document.getElementById('second_tax');
+
+            divobj.value = tot_price;
+            divmin.value = minus;
+            divthird.value = final_tax3;
+            divfirst.value = incomee1;
+            divsecond.value = income2;
+
+
+        } else {
+            var extra4 = price - 1200000;
+            var incomee1 = (price - 200000) * 5 / 100;
+            var incomee2 = (price - 400000) * 10 / 100;
+            var incomee3 = (price - 800000) * 20 / 100;
+
+            var final_tax4 = extra4 * 25 / 100;
+            var minus = (tax + medical + travel + final_tax4 + incomee1 + incomee2 + incomee3)
+            var tot_price = price + minus;
+
+            var divobj = document.getElementById('tot_amount');
+            var divmin = document.getElementById('tot_minus');
+            var divthird = document.getElementById('third_tax');
+            var divfirst = document.getElementById('first_tax');
+            var divsecond = document.getElementById('second_tax');
+            var divfourth = document.getElementById('fourth_tax');
+
+
+            divobj.value = tot_price;
+            divmin.value = minus;
+            divfourth.value = final_tax4;
+            divthird.value = incomee3;
+            divfirst.value = incomee1;
+            divsecond.value = incomee2;
+        }
     }
+
 </script>
